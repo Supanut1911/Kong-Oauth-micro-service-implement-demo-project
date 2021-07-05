@@ -11,19 +11,19 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"
 const leaves = [
     {
         id: "001",
-        name: "Jason",
+        name: "Alice",
         type: "sick",
         numberLeave: 2
     },
     {
         id: " 002",
-        name: "Bean",
+        name: "Bob",
         type: "bussiness",
         numberLeave: 5
     },
     {
         id: "003",
-        name: "Mike",
+        name: "Cat",
         type: "marry",
         numberLeave: 7
     },
@@ -31,17 +31,17 @@ const leaves = [
 
 const getLeaves = {
     "001": {
-        name: "Jason",
+        name: "Alice",
         type: "sick",
         numberLeave: 2
     },
     "002": {
-        name: "Bean",
+        name: "Bob",
         type: "bussiness",
         numberLeave: 5
     },
     "003": {
-        name: "Mike",
+        name: "Cat",
         type: "marry",
         numberLeave: 7
     },
