@@ -50,17 +50,23 @@ app.get('/getSalary', (req, res) => {
 //OAuth Authorize Server
 app.post('/exchangeToken', async (req, res, next) => {
     //1 request Auth Token
-    let {clientId, scope, provisionKey, userId} = req.body
+    let {clientId, scope, provisionKey, userId, clientSecret} = req.body
+    console.log(req.body);
     try {
       let authTokenResponse = await axios({
         method: 'post',
         url: 'https://localhost:9443/api/profile/oauth2/authorize',
+        // url: 'https://localhost:9443/api/leave/oauth2/authorize',
+        // url: 'https://localhost:9443/oauth2/authorize',
+
         data: {
           'client_id': clientId,
           "response_type": "code",
           "scope": scope,
           "provision_key": provisionKey,
           "authenticated_userid": userId
+          // "global_credentials": true
+
         }
       })
 
@@ -74,11 +80,15 @@ app.post('/exchangeToken', async (req, res, next) => {
       let accessTokenReponse = await axios({
         method: 'post',
         url: 'https://localhost:9443/api/profile/oauth2/token',
+        // url: 'https://localhost:9443/api/leave/oauth2/token',
+        // url: 'https://localhost:9443/oauth2/token',
+
+
         data: {
           "grant_type": "authorization_code",
           "code": authencode,
-          "client_id":"PYbB8OSG7kS7d69y7VFfDlepRYkvoodK",
-          "client_secret": "m5Aln5kdI3qfwtNUWAn5yBcSDWec2Axo"
+          "client_id":clientId,
+          "client_secret": clientSecret
         }
       })
 

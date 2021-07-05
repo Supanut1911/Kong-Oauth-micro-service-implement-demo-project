@@ -10,24 +10,57 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"
 
 const leaves = [
     {
-        id: "L001",
+        id: "001",
         name: "Jason",
         type: "sick",
         numberLeave: 2
     },
     {
-        id: "L002",
+        id: " 002",
         name: "Bean",
         type: "bussiness",
         numberLeave: 5
     },
     {
-        id: "L003",
+        id: "003",
         name: "Mike",
         type: "marry",
         numberLeave: 7
     },
 ]
+
+const getLeaves = {
+    "001": {
+        name: "Jason",
+        type: "sick",
+        numberLeave: 2
+    },
+    "002": {
+        name: "Bean",
+        type: "bussiness",
+        numberLeave: 5
+    },
+    "003": {
+        name: "Mike",
+        type: "marry",
+        numberLeave: 7
+    },
+}
+
+const getLeavefunc = ({ headers }) => {
+    return headers['mock-logged-in-as'] ||
+           headers['x-authenticated-userid']
+}
+
+app.get('/getLeavebyId', (req, res) => {
+    console.log(req.headers)
+    const user = getLeavefunc(req)
+    if (!user) {
+      res.status(401).send('Not authorized')
+      return
+    }
+    res.send(getLeaves[user] || [])
+  })
 
 app.post('/createLeave', async (req, res, next) => {
     console.log(req.body);
