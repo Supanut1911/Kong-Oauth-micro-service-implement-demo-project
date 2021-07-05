@@ -2,6 +2,7 @@ const fs = require('fs')
 const express = require('express')
 const app = express()
 const data = require('./data.json')
+const salaryData = require('./salary_data.json')
 const SSL_CERT = fs.readFileSync('./certificates/cert.pem')
 const SSL_KEY =  fs.readFileSync('./certificates/key.pem')
 const port = 7788
@@ -34,6 +35,17 @@ app.get('/verify', (req, res) => {
     }
     res.send(data[user] || [])
 })
+
+app.get('/getSalary', (req, res) => {
+  console.log(req.headers)
+  const user = getCurrentUser(req)
+  if (!user) {
+    res.status(401).send('Not authorized')
+    return
+  }
+  res.send(salaryData[user] || [])
+})
+
 
 //OAuth Authorize Server
 app.post('/exchangeToken', async (req, res, next) => {
