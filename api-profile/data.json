@@ -1,6 +1,7 @@
 {
     "001": {
         "email": "alice@test.com",
+        "username":"Alice",
         "role": "staff",
         "balance": 500,
         "payload": [
@@ -11,6 +12,7 @@
     },
     "002": {
         "email": "bob@test.com",
+        "username":"Bob",
         "role": "engineer",
         "balance": 450,
         "payload": [
@@ -21,6 +23,7 @@
     },
     "003": {
         "email": "cat@test.com",
+        "username":"Cat",
         "role": "dev",
         "balance": 250,
         "payload": [

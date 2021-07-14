@@ -89,3 +89,8 @@ for request authorization code and exchange for access token
 
 
 ![alt text](images/pic2.png)
+
+เมื่อลองนำ access token ที่ได้มาใช้กับ app api-leave ในการ authen resource server เพื่อขอ resource 
+
+
+![alt text](images/pic10.png)

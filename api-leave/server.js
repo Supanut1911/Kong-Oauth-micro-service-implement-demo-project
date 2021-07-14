@@ -8,62 +8,70 @@ app.use(express.json())
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"
 
-const leaves = [
+// const leaves = [
+//     {
+//         id: "001",
+//         name: "Alice",
+//         type: "sick",
+//         numberLeave: 2
+//     },
+//     {
+//         id: " 002",
+//         name: "Bob",
+//         type: "bussiness",
+//         numberLeave: 5
+//     },
+//     {
+//         id: "003",
+//         name: "Cat",
+//         type: "marry",
+//         numberLeave: 7
+//     },
+// ]
+
+const getLeaves = [
     {
-        id: "001",
         name: "Alice",
         type: "sick",
         numberLeave: 2
     },
     {
-        id: " 002",
         name: "Bob",
         type: "bussiness",
         numberLeave: 5
     },
     {
-        id: "003",
         name: "Cat",
         type: "marry",
         numberLeave: 7
     },
 ]
 
-const getLeaves = {
-    "001": {
-        name: "Alice",
-        type: "sick",
-        numberLeave: 2
-    },
-    "002": {
-        name: "Bob",
-        type: "bussiness",
-        numberLeave: 5
-    },
-    "003": {
-        name: "Cat",
-        type: "marry",
-        numberLeave: 7
-    },
-}
-
 const getLeavefunc = ({ headers }) => {
     return headers['mock-logged-in-as'] ||
            headers['x-authenticated-userid']
 }
 
-app.get('/getLeavebyId', (req, res) => {
+app.get('/getLeave', (req, res) => {
     console.log(req.headers)
     const user = getLeavefunc(req)
     if (!user) {
       res.status(401).send('Not authorized')
       return
     }
-    res.send(getLeaves[user] || [])
+    let leaveRes =  getLeaves.map(e => {
+        if(e.name == user) {
+            return e
+        }
+    })
+    res.json(
+        leaveRes.filter(e => e != undefined)
+    )
+
   })
 
 app.post('/createLeave', async (req, res, next) => {
-    console.log(req.body);
+    console.log('xxxxxxxxxxxx',req.body);
     let {type, accessToken, numberLeave} = req.body
 
     try {
@@ -82,16 +90,17 @@ app.post('/createLeave', async (req, res, next) => {
     let profile = profileRes.data
     let leave = {
         id: 'L00' + Math.floor(Math.random() * (100 - 10) + 10),
-        name: profile.email,
+        name: profile.username,
         type: type,
         numberLeave: numberLeave
     }
 
-    leaves.push(leave)
+
+    getLeaves.push(leave)
 
     res.json({
         message: "create leave success",
-        data: leaves
+        data: getLeaves
     })
 
     } catch (error) {
