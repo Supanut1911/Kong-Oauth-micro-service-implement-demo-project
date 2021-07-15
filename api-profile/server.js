@@ -21,6 +21,11 @@ const getCurrentUser = ({ headers }) => {
            headers['x-authenticated-userid']
 }
 
+const getSalaryUser = ({ headers }) => {
+  return headers['mock-logged-in-as'] ||
+         headers['x-authenticated-userid']
+}
+
 app.get('/index',(req, res) => {
     res.send('hello this api-profile')
 })
@@ -38,7 +43,7 @@ app.get('/verify', (req, res) => {
 
 app.get('/getSalary', (req, res) => {
   console.log(req.headers)
-  const user = getCurrentUser(req)
+  const user = getSalaryUser(req)
   if (!user) {
     res.status(401).send('Not authorized')
     return

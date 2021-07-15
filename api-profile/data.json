@@ -1,5 +1,5 @@
 {
-    "001": {
+    "Alice": {
         "email": "alice@test.com",
         "username":"Alice",
         "role": "staff",
@@ -10,7 +10,7 @@
             {"date": "2021-01-03", "value": 20}
         ]
     },
-    "002": {
+    "Bob": {
         "email": "bob@test.com",
         "username":"Bob",
         "role": "engineer",
@@ -21,7 +21,7 @@
             {"date": "2021-01-03", "value": 7}
         ]
     },
-    "003": {
+    "Cat": {
         "email": "cat@test.com",
         "username":"Cat",
         "role": "dev",
@@ -33,3 +33,4 @@
         ]
     }
 }
+
